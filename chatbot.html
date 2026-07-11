@@ -58,8 +58,13 @@
           { message: "todays date", sender: "user",id:"id3" },
           { message: "Today is July 7", sender: "chatbot" ,id:"id4"},
         ];
+
+        function sendMessage(){
+          console.log("send Message")
+        }
         return(
           <>
+            <button onClick={sendMessage()}> Send Message</button>
             {chatMessage.map((chatMessage) => {
                 return (
                   <ChatMessage
