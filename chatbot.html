@@ -11,15 +11,32 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      function ChatInput() {
+      function ChatInput({chatMessage,setChatMessage}) {
+        const [inputText, setInputText] = React.useState("");
+
+        function saveInputText(event) {
+          setInputText(event.target.value);
+        }
+
+        function sendMessage() {
+          setChatMessage([
+            ...chatMessage,
+            {
+              message: "test",
+              sender: "user",
+              id: crypto.randomUUID(),
+            },
+          ]);
+        }
         return (
           <>
             <input
               type="text"
               placeholder="Send a message to the ChatBot"
               size="30"
+              onChange={saveInputText}
             />
-            <button>Send</button>
+            <button onClick={sendMessage}>Send</button>
           </>
         );
       }
@@ -51,52 +68,49 @@
         );
       }
 
-      function ChatMessages(){
-        const array = React.useState([
-          { message: "Hello Chatbot", sender: "user" ,id:"id1"},
-          { message: "Hello! How can I help you?", sender: "chatbot" ,id:"id2"},
-          { message: "todays date", sender: "user",id:"id3" },
-          { message: "Today is July 7", sender: "chatbot" ,id:"id4"},
-        ]);
-        const chatMessage = array[0];
-        const setChatMessage = array[1];
-        
-
-        function sendMessage(){
-          setChatMessage([
-            ...chatMessage,
-            {
-              message:"test",
-              sender:"user",
-              id: crypto.randomUUID()
-            }
-          ])
-        }
-        return(
+      function ChatMessages({chatMessage,setChatMessage}) {
+         return (
           <>
-            <button onClick={sendMessage}> Send Message</button>
             {chatMessage.map((chatMessage) => {
-                return (
-                  <ChatMessage
-                    message={chatMessage.message}
-                    sender={chatMessage.sender}
-                    key={chatMessage.id}
-                  />
-                );
-              })}
+              return (
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key={chatMessage.id}
+                />
+              );
+            })}
           </>
-        )
-        
-
+        );
       }
 
       function App() {
-        
+        //lifting the state up AKA making a global variable accross all componenets
+        const [chatMessage, setChatMessage] = React.useState([
+          { message: "Hello Chatbot", sender: "user", id: "id1" },
+          {
+            message: "Hello! How can I help you?",
+            sender: "chatbot",
+            id: "id2",
+          },
+          { message: "todays date", sender: "user", id: "id3" },
+          { message: "Today is July 7", sender: "chatbot", id: "id4" },
+        ]);
+        //array destructuring, the order ALWAYS MATTERS
+        //const [chatMessage, setChatMessage] = array;
+        //const chatMessage = array[0];
+        //const setChatMessage = array[1];
         return (
           <>
-            <ChatInput />
-            <ChatMessages/>
+            <ChatInput 
+              chatMessage={chatMessage}
+              setChatMessage={setChatMessage}
+            />
+            <ChatMessages 
+              chatMessage={chatMessage}
+              setChatMessage={setChatMessage}
             
+            />
           </>
         );
       }
