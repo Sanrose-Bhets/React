@@ -2,6 +2,34 @@
 <html>
   <head>
     <title>ChatBot</title>
+    <style>
+      .sendButton{
+        background-color:rgb(25, 135, 84);
+        color: white;
+        padding: 12px 20px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      .chatInput{
+        padding: 12px 15px;
+        border-radius: 12px;
+        border-width: 1px;
+        font-size: 15px;
+        flex-grow: 1;
+
+      }
+
+      .chatInputContainer{
+        display: flex;
+       
+        
+      }
+
+
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -49,16 +77,18 @@
 
 
         return (
-          <>
+          <div className="chatInputContainer">
             <input
               type="text"
               placeholder="Send a message to the ChatBot"
               size="30"
               onChange={saveInputText}
               value={inputText}
+              className="chatInput"
             />
-            <button onClick={sendMessage}>Send</button>
-          </>
+            <button onClick={sendMessage}
+            className="sendButton">Send</button>
+          </div>
         );
       }
 
@@ -122,7 +152,7 @@
         //const chatMessage = array[0];
         //const setChatMessage = array[1];
         return (
-          <>
+          <div className="appContainer">
             <ChatInput 
               chatMessage={chatMessage}
               setChatMessage={setChatMessage}
@@ -132,7 +162,7 @@
               
             
             />
-          </>
+          </div>
         );
       }
 
