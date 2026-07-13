@@ -9,6 +9,8 @@
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <script src="https://unpkg.com/supersimpledev/chatbot.js""></script>
+
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
       function ChatInput({chatMessage,setChatMessage}) {
@@ -19,15 +21,33 @@
         }
 
         function sendMessage() {
-          setChatMessage([
+          const newChatMessage=[
             ...chatMessage,
             {
-              message: "test",
+              message: inputText,
               sender: "user",
               id: crypto.randomUUID(),
             },
+          ]
+
+          setChatMessage(newChatMessage);
+
+          const response= Chatbot.getResponse(inputText);
+
+          setChatMessage([
+            ...newChatMessage,
+            {
+              message: response,
+              sender: "chatbot",
+              id: crypto.randomUUID(),
+            },
           ]);
+          
+
+          setInputText("");
         }
+
+
         return (
           <>
             <input
@@ -35,6 +55,7 @@
               placeholder="Send a message to the ChatBot"
               size="30"
               onChange={saveInputText}
+              value={inputText}
             />
             <button onClick={sendMessage}>Send</button>
           </>
@@ -68,7 +89,7 @@
         );
       }
 
-      function ChatMessages({chatMessage,setChatMessage}) {
+      function ChatMessages({chatMessage}) {
          return (
           <>
             {chatMessage.map((chatMessage) => {
@@ -108,7 +129,7 @@
             />
             <ChatMessages 
               chatMessage={chatMessage}
-              setChatMessage={setChatMessage}
+              
             
             />
           </>
