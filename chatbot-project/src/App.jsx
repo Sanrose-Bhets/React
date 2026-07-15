@@ -1,35 +1,42 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { ChatInput } from './components/ChatInput'
+import { ChatMessage } from './components/ChatMessage'
+import { ChatMessages } from './components/ChatMessages'
+import { Chatbot } from 'supersimpledev'
+import RobotProfileImage from './assets/robot.png'
+import UserProfileImage from './assets/robot.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  //lifting the state up AKA making a global variable accross all componenets
+  const [chatMessage, setChatMessage] = useState([
+    { message: "Hello Chatbot", sender: "user", id: "id1" },
+    {
+      message: "Hello! How can I help you?",
+      sender: "chatbot",
+      id: "id2",
+    },
+    { message: "todays date", sender: "user", id: "id3" },
+    { message: "Today is July 7", sender: "chatbot", id: "id4" },
+  ]);
+  //array destructuring, the order ALWAYS MATTERS
+  //const [chatMessage, setChatMessage] = array;
+  //const chatMessage = array[0];
+  //const setChatMessage = array[1];
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="appContainer">
+      
+      <ChatMessages 
+        chatMessage={chatMessage}
+        
+      
+      />
+      <ChatInput 
+        chatMessage={chatMessage}
+        setChatMessage={setChatMessage}
+      />
+    </div>
+  );
 }
 
 export default App

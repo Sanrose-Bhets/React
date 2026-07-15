@@ -1,42 +1,67 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+.sendButton{
+  background-color:rgb(25, 135, 84);
+  color: white;
+  padding: 12px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.chatInput{
+  padding: 12px 15px;
+  border-radius: 12px;
+  border-width: 1px;
+  font-size: 15px;
+  flex-grow: 1;
+
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.chatInputContainer{
+  display: flex;
+  margin-bottom: 60px;
+
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.appContainer{
+  max-width: 1000px;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+.chat_message_user{
+  display: flex;
+  justify-content: right;
+  align-items: start;
 
-.card {
-  padding: 2em;
 }
+.chat_message_robot{
+  display: flex;
+  justify-content: left;
+  align-items: start;
 
-.read-the-docs {
-  color: #888;
+}
+.chat_message_text{
+  background-color: rgb(238,238,238);
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  max-width: 300px;
+  
+  
+}
+.chat_message_profile{
+  width: 45px;
+}
+.chatMessagesContainer{
+  flex-grow: 1;
+  margin-top: 20px;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
